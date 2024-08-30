@@ -44,3 +44,4 @@ fun Navigation(navController: NavHostController= rememberNavController())
     }
 }
 
+//git remote add origin https://github.com/Sagarika-CUCSIT/BankingApp.git
