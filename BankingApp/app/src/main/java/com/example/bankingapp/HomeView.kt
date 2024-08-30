@@ -66,7 +66,7 @@ fun Login(navController: NavController) {//login: LogIn
             )
 
             Button(
-                onClick = { navController.navigate(Screen.Account.route) },
+                onClick = { navController.navigate(Screen.AccountHomeView.route) },
                 modifier = Modifier.align(Alignment.End)
             ) {
                 Text("Login")

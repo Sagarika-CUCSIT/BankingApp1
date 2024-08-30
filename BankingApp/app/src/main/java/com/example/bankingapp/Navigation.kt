@@ -14,10 +14,10 @@ fun Navigation(navController: NavHostController= rememberNavController())
     {
                     composable(Screen.HomeScreen.route){
                         //Login(navController)
-                        Account(navController)
+                        Login(navController)
                     }
-                    composable(Screen.Account.route){
-                        Account(navController)
+                    composable(Screen.AccountHomeView.route){
+                        AccountHomeView(navController)
                     }
                     composable(Screen.AccountBalance.route){
                         AccountBalance(navController)
@@ -31,15 +31,15 @@ fun Navigation(navController: NavHostController= rememberNavController())
                     }
                     composable(Screen.DrawerScreen.Home.dRoute)
                     {
-                        Account(navController)
+                        AccountHomeView(navController)
                     }
-                    composable(Screen.DrawerScreen.Deposits.dRoute)
+                    composable(Screen.DrawerScreen.Account.dRoute)
                     {
                         AccountBalance(navController)
                     }
                     composable(Screen.DrawerScreen.Settings.dRoute)
                     {
-                        Account(navController)
+                        AccountHomeView(navController)
                     }
     }
 }

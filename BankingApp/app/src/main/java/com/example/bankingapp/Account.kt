@@ -7,6 +7,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+//import androidx.compose.material.BottomNavigation
+//import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -26,12 +28,36 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Account(navController: NavController) {
+fun AccountHomeView(navController: NavController) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val viewModel: MainViewModel = viewModel()
     val currentScreen = remember { viewModel.currentScreen.value }
     val title = remember { mutableStateOf(currentScreen.title) }
+    val bottomBar: @Composable () -> Unit = {
+        //if (currentScreen is Screen.DrawerScreen || currentScreen is Screen.BottomScreen) {
+        NavigationBar(Modifier.wrapContentSize()) {
+            ScreenInBottom.forEach { item ->
+                NavigationBarItem(
+                    selected = currentScreen == item,
+                    onClick = { navController.navigate(item.bRoute) },
+                    icon = {
+                        Icon(
+                            painter = painterResource(id = item.icon),
+                            contentDescription = item.bTitle
+                        )
+                    },
+                    label = { Text(text = item.bTitle) },
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = Color.Blue, // Customize selected icon color
+                        unselectedIconColor = Color.Gray, // Customize unselected icon color
+                        selectedTextColor = Color.Blue, // Customize selected text color
+                        unselectedTextColor = Color.Gray // Customize unselected text color
+                    )
+                )
+            }
+        }
+    }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -41,7 +67,11 @@ fun Account(navController: NavController) {
                 //    .background(Color.White)// Set background color of the drawer here
                 //    .size(300.dp)
             //)
-            LazyColumn(Modifier.padding(WindowInsets.statusBars.asPaddingValues()).background(Color.White).size(300.dp)) {
+            LazyColumn(
+                Modifier
+                    .padding(WindowInsets.statusBars.asPaddingValues())
+                    .background(Color.White)
+                    .size(300.dp)) {
                 items(ScreenInDrawer) { item ->
                     DrawerItem(selected = navController.currentBackStackEntryAsState().value?.destination?.route == item.dRoute, item = item) {
                         scope.launch {
@@ -59,6 +89,7 @@ fun Account(navController: NavController) {
         },
         content = {
             Scaffold(
+                bottomBar = bottomBar,
                 topBar = {
                     TopAppBar(
                         title = { Text("Banking App") },
@@ -210,7 +241,7 @@ fun DrawerItem(
 @Composable
 fun AccountPreview() {
     val navController = rememberNavController()
-    Account(navController = navController)
+    AccountHomeView(navController = navController)
 }
 
 
