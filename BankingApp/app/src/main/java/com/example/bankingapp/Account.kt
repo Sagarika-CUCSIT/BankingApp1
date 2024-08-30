@@ -17,6 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -87,6 +89,7 @@ fun AccountHomeView(navController: NavController) {
                 }
             }
         },
+
         content = {
             Scaffold(
                 bottomBar = bottomBar,
@@ -101,14 +104,16 @@ fun AccountHomeView(navController: NavController) {
                             }) {
                                 Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "Menu")
                             }
-                        }//here the functionality is such that upon clicking the Account icon, the drawer should open and clicking anywhere outside the drawer should close it
+                        }
                     )
                 }
             ) { innerPadding ->
                 Column(
                     modifier = Modifier
                         .padding(innerPadding)
-                        .fillMaxSize()
+                        .fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
                     val boxSize = 100.dp
                     val buttonModifier = Modifier
@@ -117,94 +122,81 @@ fun AccountHomeView(navController: NavController) {
                         .padding(8.dp)
                         .clickable { /* Handle click here */ }
 
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp)
-                            .border(BorderStroke(1.dp, Color.Gray))
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .padding(16.dp)
-                                .fillMaxSize(),
-                            horizontalAlignment = Alignment.Start,
-                            verticalArrangement = Arrangement.Top
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            /*Text(
-                                text = "Banking App",
-                                style = MaterialTheme.typography.headlineLarge,
-                                modifier = Modifier.padding(bottom = 16.dp)
-                            )*/
-
-                            Column(
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.spacedBy(16.dp)
+                            // Account Balance Button
+                            Box(
+                                modifier = buttonModifier.clickable {
+                                    navController.navigate(Screen.AccountBalance.route)
+                                }
                             ) {
-                                Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                                    // Account Balance Button
-                                    Box(
-                                        modifier = buttonModifier.clickable {
-                                            navController.navigate(Screen.AccountBalance.route)
-                                        }
-                                    ) {
-                                        Column(
-                                            verticalArrangement = Arrangement.Center,
-                                            horizontalAlignment = Alignment.CenterHorizontally
-                                        ) {
-                                            Text(text = "Account Balance")
-                                        }
-                                    }
+                                Text(
+                                    text = "Account Balance",
+                                    //maxLines = 1,
+                                    //overflow = TextOverflow.Ellipsis,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
 
-                                    // Loan Button
-                                    Box(
-                                        modifier = buttonModifier.clickable {
-                                            navController.navigate("loan")
-                                        }
-                                    ) {
-                                        Column(
-                                            verticalArrangement = Arrangement.Center,
-                                            horizontalAlignment = Alignment.CenterHorizontally
-                                        ) {
-                                            Text(text = "Loan")
-                                        }
-                                    }
+                            // Loan Button
+                            Box(
+                                modifier = buttonModifier.clickable {
+                                    navController.navigate(Screen.AccountLoan.route)
                                 }
+                            ) {
+                                Text(
+                                    text = "Loan",
+                                    //maxLines = 2,
+                                    //overflow = TextOverflow.Ellipsis,
+                                    textAlign = TextAlign.Center
 
-                                Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                                    // Investment Button
-                                    Box(
-                                        modifier = buttonModifier.clickable {
-                                            navController.navigate("investment")
-                                        }
-                                    ) {
-                                        Column(
-                                            verticalArrangement = Arrangement.Center,
-                                            horizontalAlignment = Alignment.CenterHorizontally
-                                        ) {
-                                            Text(text = "Investment")
-                                        }
-                                    }
+                                )
+                            }
+                        }
 
-                                    // Misc Button
-                                    Box(
-                                        modifier = buttonModifier.clickable {
-                                            navController.navigate("misc")
-                                        }
-                                    ) {
-                                        Column(
-                                            verticalArrangement = Arrangement.Center,
-                                            horizontalAlignment = Alignment.CenterHorizontally
-                                        ) {
-                                            Text(text = "Misc")
-                                        }
-                                    }
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            // Investment Button
+                            Box(
+                                modifier = buttonModifier.clickable {
+                                    navController.navigate("investment")
                                 }
+                            ) {
+                                Text(
+                                    text = "Investment",
+                                    //maxLines = 1,
+                                    //overflow = TextOverflow.Ellipsis,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+
+                            // Misc Button
+                            Box(
+                                modifier = buttonModifier.clickable {
+                                    navController.navigate("misc")
+                                }
+                            ) {
+                                Text(
+                                    text = "Misc",
+                                    //maxLines = 1,
+                                    //overflow = TextOverflow.Ellipsis,
+                                    textAlign = TextAlign.Center
+                                )
                             }
                         }
                     }
                 }
             }
         }
+
     )
 }
 
@@ -422,144 +414,107 @@ fun Account(navController: NavController) {
             }
         }
     }
-}*/
-/*package com.example.bankingapp
+}
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+------>>>>>>>>>>>>>>>>>
+{ innerPadding ->
+                Column(
+                    modifier = Modifier
+                        .padding(innerPadding)
+                        .fillMaxSize()
+                ) {
+                    val boxSize = 100.dp
+                    val buttonModifier = Modifier
+                        .size(boxSize)
+                        .border(1.dp, Color.Black)
+                        .padding(8.dp)
+                        .clickable { /* Handle click here */ }
 
-
-@Composable
-fun Account(navController: NavController) {
-    // Define a uniform size for buttons and boxes
-    val boxSize = 100.dp
-    val buttonModifier = Modifier
-        .size(boxSize)
-        .border(1.dp, Color.Black)
-        .padding(8.dp)
-        .clickable { /* Handle click here */ }
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-            .border(BorderStroke(1.dp, Color.Gray)) // Optional: Border for better visibility
-    ) {
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.Top
-        ) {
-            Text(
-                text = "Banking App",
-                style = MaterialTheme.typography.headlineLarge,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp) // space between rows
-            ) {
-                Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                    // Account Balance Button
-                    Box(
-                        modifier = buttonModifier.clickable {
-                            // Handle Account Balance click
-                            navController.navigate(Screen.AccountBalance.route)
-                        }
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp)
+                            .border(BorderStroke(1.dp, Color.Gray))
                     ) {
                         Column(
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .fillMaxSize(),
+                            horizontalAlignment = Alignment.Start,
+                            verticalArrangement = Arrangement.Top
                         ) {
-                            Text(text = "Account Balance")
-                        }
-                    }
+                            /*Text(
+                                text = "Banking App",
+                                style = MaterialTheme.typography.headlineLarge,
+                                modifier = Modifier.padding(bottom = 16.dp)
+                            )*/
 
-                    // Loan Button
-                    Box(
-                        modifier = buttonModifier.clickable {
-                            // Handle Loan click
-                            navController.navigate("loan")
-                        }
-                    ) {
-                        Column(
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text(text = "Loan")
-                        }
-                    }
-                }
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(16.dp)
+                            ) {
+                                Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                                    // Account Balance Button
+                                    Box(
+                                        modifier = buttonModifier.clickable {
+                                            navController.navigate(Screen.AccountBalance.route)
+                                        }
+                                    ) {
+                                        Column(
+                                            verticalArrangement = Arrangement.Center,
+                                            horizontalAlignment = Alignment.CenterHorizontally
+                                        ) {
+                                            Text(text = "Account Balance")
+                                        }
+                                    }
 
-                Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                    // Investment Button
-                    Box(
-                        modifier = buttonModifier.clickable {
-                            // Handle Investment click
-                            navController.navigate("investment")
-                        }
-                    ) {
-                        Column(
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text(text = "Investment")
-                        }
-                    }
+                                    // Loan Button
+                                    Box(
+                                        modifier = buttonModifier.clickable {
+                                            navController.navigate(Screen.AccountLoan.route)
+                                        }
+                                    ) {
+                                        Column(
+                                            verticalArrangement = Arrangement.Center,
+                                            horizontalAlignment = Alignment.CenterHorizontally
+                                        ) {
+                                            Text(text = "Loan")
+                                        }
+                                    }
+                                }
 
-                    // Misc Button
-                    Box(
-                        modifier = buttonModifier.clickable {
-                            // Handle Misc click
-                            navController.navigate("misc")
-                        }
-                    ) {
-                        Column(
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text(text = "Misc")
+                                Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                                    // Investment Button
+                                    Box(
+                                        modifier = buttonModifier.clickable {
+                                            navController.navigate("investment")
+                                        }
+                                    ) {
+                                        Column(
+                                            verticalArrangement = Arrangement.Center,
+                                            horizontalAlignment = Alignment.CenterHorizontally
+                                        ) {
+                                            Text(text = "Investment")
+                                        }
+                                    }
+
+                                    // Misc Button
+                                    Box(
+                                        modifier = buttonModifier.clickable {
+                                            navController.navigate("misc")
+                                        }
+                                    ) {
+                                        Column(
+                                            verticalArrangement = Arrangement.Center,
+                                            horizontalAlignment = Alignment.CenterHorizontally
+                                        ) {
+                                            Text(text = "Misc")
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun AccountPreview(){
-    val navController = rememberNavController()
-    Account(navController = navController )
-}*/
+ */
