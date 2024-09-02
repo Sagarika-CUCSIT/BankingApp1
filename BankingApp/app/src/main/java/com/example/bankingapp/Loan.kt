@@ -28,7 +28,7 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun Loan(navController: NavController) {
     Scaffold(topBar = {
-        AppBarView(title = "Account Balance") //AppBarView() is defined in AppBarSyntax
+        AppBarView(title = "Loan") //AppBarView() is defined in AppBarSyntax
         { navController.navigateUp() }
     })
     {

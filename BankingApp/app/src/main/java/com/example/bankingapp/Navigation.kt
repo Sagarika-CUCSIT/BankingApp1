@@ -1,10 +1,12 @@
 package com.example.bankingapp
 
+import UserRegistration
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
 
 
 @Composable
@@ -40,6 +42,15 @@ fun Navigation(navController: NavHostController= rememberNavController())
                     composable(Screen.DrawerScreen.Settings.dRoute)
                     {
                         AccountHomeView(navController)
+                    }
+                    composable(Screen.UserRegistration.route){
+                        UserRegistration(navController)
+                    }
+                    composable(Screen.BottomScreen.Deposit.bRoute){
+                        Deposit(navController)
+                    }
+                    composable(Screen.BottomScreen.Pay.bRoute){
+                        Pay(navController)
                     }
     }
 }

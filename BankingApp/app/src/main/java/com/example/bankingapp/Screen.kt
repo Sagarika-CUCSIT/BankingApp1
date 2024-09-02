@@ -7,12 +7,12 @@ sealed class Screen(val title:String, val route:String) {
     {
         object Deposit:BottomScreen(
             "Deposit",
-            "Deposit",
+            "Deposit",  // the navigation shall happen directly via broute(Deposit) described in the "foreach-> ..." code mentioned in the Account. Also the route for it is mentioned in Navigation.y
             R.drawable.baseline_subdirectory_arrow_left_24
         )
         object Pay:BottomScreen(
-            "Deposit",
-            "Deposit",
+            "Pay",
+            "Pay", // the navigation shall happen directly via the broute(pay) described in the "foreach-> ..." code  mentioned in the Account. Also the route for it is mentioned in Navigation.y
             R.drawable.baseline_qr_code_scanner_24
         )
     }
@@ -36,9 +36,12 @@ sealed class Screen(val title:String, val route:String) {
     }
     object HomeScreen: Screen("logIn_screen", "Login")
     object AccountHomeView: Screen("account_home_page", "AccountHomeView")
+    object UserRegistration: Screen("User_Registration","UserRegistration")
     object AccountBalance: Screen("account_balance", "AccountBalance")
     object AccountTransaction: Screen("account_transaction", "AccountTransaction")
     object AccountLoan: Screen("account_loan", "AccountLoan")
+    object QuickTransfer: Screen("quick_transfer", "QuickTransfer")
+    object AddBeneficiary:Screen("add_beneficiary", "AddBeneficiary")
 
 }
 

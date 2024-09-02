@@ -115,7 +115,7 @@ fun AccountHomeView(navController: NavController) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    val boxSize = 100.dp
+                    val boxSize = 120.dp
                     val buttonModifier = Modifier
                         .size(boxSize)
                         .border(1.dp, Color.Black)
